@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}My Questions - Edu-Paper{% endblock %} 
+
+{% block content %}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>My Questions</h3>
+        <a href="{{ url_for('questions.new_question')}}" class="btn btn-primary">New Question</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Type</th>
+                <th>Text</th>
+                <th>Marks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for q in questions %}
+            <tr>
+                <td>{{ q.id }}</td>
+                <td>{{ q.type }}</td>
+                <td>{{ q.text|truncate(120) }}</td>
+                <td>{{ q.marks }}</td>
+                <td>
+                    <a href="{{ url_for('questions.edit_question', q_id=q.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <form style="display: none;" method="post" action="{{ url_for('questions.delete_question', q_id.q.id) }}">
+                        {{ csrf_token() }}
+                        <button class="btn btn-sm btn-danger" onclick="return confirm('Delete question?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
