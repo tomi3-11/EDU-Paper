@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Edit Question</h2>
+    <form method="POST">
+        
+        <!-- Question Text -->
+        <div class="form-group mb-3">
+            <label for="text">Question</label>
+            <textarea class="form-control" id="text" name="text" rows="3">{{ q.text }}</textarea>
+        </div>
+
+        <!-- Marks -->
+        <div class="form-group mb-3">
+            <label for="marks">Marks</label>
+            <input type="number" class="form-control" id="marks" name="marks" value="{{ q.marks }}">
+        </div>
+
+        {% if q.type == 'MCQ' %}
+        <hr>
+        <h4>Options</h4>
+        
+        {% for option in q.options %}
+        <div class="input-group mb-2">
+            <div class="input-group-text">
+                <input type="radio" name="correct_label" value="{{ option.label }}" {% if option.is_correct %}checked{% endif %}>
+            </div>
+            <input type="text" class="form-control" name="option_text" value="{{ option.text }}">
+            <span class="input-group-text">{{ option.label }}</span>
+        </div>
+        {% endfor %}
+
+        <!-- Add extra empty inputs so teacher can add new options -->
+        {% for i in range(4 - q.options|length) %}
+        <div class="input-group mb-2">
+            <div class="input-group-text">
+                <input type="radio" name="correct_label" value="{{ "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i+q.options|length] }}">
+            </div>
+            <input type="text" class="form-control" name="option_text" placeholder="New option...">
+            <span class="input-group-text">{{ "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[i+q.options|length] }}</span>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <button type="submit" class="btn btn-success mt-3">Save Changes</button>
+        <a href="{{ url_for('questions.list_questions') }}" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>
+{% endblock %}
