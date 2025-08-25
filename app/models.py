@@ -34,9 +34,12 @@ class Exam(db.Model):
     class_level = db.Column(db.String(64))
     term = db.Column(db.String)
     dusration_mins = db.Column(db.Integer)
-    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     published = db.Column(db.Boolean, default=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id', name='fk_exam_owner'), nullable=False)  # new
+    
+    owner = db.relationship('User', backref='exams')  # optional, makes it easier
     
     items = db.relationship('ExamItem', backref='exam', cascade='all, delete-orphan', order_by="ExamItem.order")
     

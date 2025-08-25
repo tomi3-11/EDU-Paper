@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app import db
 from app.models import Exam, Question
 
-exams = Blueprint('exams', __name__)
+exams = Blueprint('exams_bp', __name__)
 
 # List all exams
 @exams.route('/exam')

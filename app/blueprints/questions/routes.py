@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from ...extensions import db
 from ...models import Question, AnswerOption
 
-bp = Blueprint('questions', __name__, template_folder='templates', url_prefix='/questions')
+bp = Blueprint('questions_bp', __name__, template_folder='templates', url_prefix='/questions')
 
 @bp.route('/')
 @login_required
@@ -56,7 +56,7 @@ def new_question():
     return render_template('questions/new.html')
 
 
-@bp.route('/<int:q_id>/edit' method=['GET', 'POST'])
+@bp.route('/<int:q_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_question(q_id):
     q = Question.query.get_or_404(q_id)
@@ -88,7 +88,7 @@ def edit_question(q_id):
     return render_template('questions/edit.html', q=q)
 
 
-@bp.route('/<int:q_id>/delete', method=['POST'])
+@bp.route('/<int:q_id>/delete', methods=['POST'])
 def delete_question(q_id):
     q = Question.query.get_or_404(q_id)
     if q.owner_id != current_user.id:

@@ -5,18 +5,21 @@
     <h2 class="mb-4 mt-5">Welcome to your Dashboard, {{ current_user.name }}</h2>
 
     <div class="row">
+        <!-- Create Exam -->
         <div class="col-md-4">
             <div class="card shadow-sm p-3 mb-4 rounded-3">
                 <h5>Create Exam</h5>
                 <p>Start creating a new exam with multiple question types.</p>
-                <a href="#" class="btn btn-primary">New Exam</a>
+                <a href="{{ url_for('exams_bp.create_exam' )}}" class="btn btn-primary">New Exam</a>
             </div>
         </div>
+
+        <!-- My Exams -->
         <div class="col-md-4">
             <div class="card shadow-sm p-3 mb-4 rounded-3">
                 <h5>My Exams</h5>
                 <p>View, edit, or delete your previously created exams.</p>
-                <a href="#" class="btn btn-secondary">View Exams</a>
+                <a href="{{ url_for('exams_bp.list_exams')}}" class="btn btn-secondary">View Exams</a>
             </div>
         </div>
         <div class="col-md-4">
