@@ -17,9 +17,13 @@ def create_app(config_class=Config):
     # Blueprints
     from .blueprints.main.routes import bp as main_bp
     from .blueprints.auth.routes import bp as auth_bp
+    from .blueprints.questions.routes import bp as questions_bp
+    from .blueprints.questions.routes import bp as exams_bp
     
     # Resgistering Blueprints
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(questions_bp)
+    app.register_blueprint(exams_bp)
     
     return app 
