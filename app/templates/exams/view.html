@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Exam Details{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>{{ exam.title }}</h2>
+  <p><strong>Total Marks:</strong> {{ exam.total_marks }}</p>
+
+  <hr>
+  <h4>Questions in this Exam</h4>
+  <ul class="list-group mb-3">
+    {% for q in exam.questions %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      {{ q.text }}
+      <a href="{{ url_for('questions.edit_question', q_id=q.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+    </li>
+    {% else %}
+    <li class="list-group-item">No questions linked yet.</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{{ url_for('exams.add_question_to_exam', exam_id=exam.id) }}" class="btn btn-primary">+ Add Questions</a>
+  <a href="{{ url_for('exams.list_exams') }}" class="btn btn-secondary">Back to Exams</a>
+</div>
+{% endblock %}

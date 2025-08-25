@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Exam{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Edit Exam</h2>
+  <form method="POST">
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input type="text" name="title" class="form-control" value="{{ exam.title }}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Total Marks</label>
+      <input type="number" name="total_marks" class="form-control" value="{{ exam.total_marks }}" required>
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+    <a href="{{ url_for('exams.list_exams') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

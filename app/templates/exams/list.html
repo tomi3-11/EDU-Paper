@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Exams{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>All Exams</h2>
+  <a href="{{ url_for('exams.create_exam') }}" class="btn btn-primary mb-3">+ New Exam</a>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Total Marks</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for exam in exams %}
+      <tr>
+        <td>
+          <a href="{{ url_for('exams.exam_detail', exam_id=exam.id) }}">
+            {{ exam.title }}
+          </a>
+        </td>
+        <td>{{ exam.total_marks }}</td>
+        <td>
+          <a href="{{ url_for('exams.edit_exam', exam_id=exam.id) }}" class="btn btn-sm btn-warning">Edit</a>
+          <form action="{{ url_for('exams.delete_exam', exam_id=exam.id) }}" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete exam?')">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="3" class="text-center">No exams yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
