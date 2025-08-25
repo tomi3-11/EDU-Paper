@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Build Exams in Minutes | Edu-Paper{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<section class="py-5 bg-light py-5">
+    <div class="container text-center">
+        <h1 class="display-5 fw-bold">
+            Build Print-Ready Exams in Minutes
+        </h1>
+        <p class="lead text-muted">
+            Pick a question type, add items, preview with your school header, export to Docx or PDF
+            Save hours of formatting - create exams with MCQs, short answers, and more, all in one place.
+        </p>
+        <a href="{{ url_for('auth.register')}}" class="btn btn-primary btn-lg">Start Free</a>
+        <a href="{{ url_for('auth.login')}}" class="btn btn-outline-secondary btn-lg ms-2">Sign in</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <i class="bi bi-pencil-square display-4 text-primary mb-3"></i>
+                        <h5 class="fw-bold">Easy Question Input</h5>
+                        <p class="text-muted">
+                            Add multiple-choice, true/false, and short answer questions without hassle.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <i class="bi bi-file-earmark-text display-4 text-success mb-3"></i>
+                        <h5 class="fw-bold">Auto Formatting</h5>
+                        <p class="text-muted">
+                            Generate clean, printable exam papers instantly – no more hours in MS Word.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <i class="bi bi-people display-4 text-warning mb-3"></i>
+                        <h5 class="fw-bold">For Every Teacher</h5>
+                        <p class="text-muted">
+                            Designed to simplify exam creation for schools, colleges, and tutors.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="bg-primary text-white text-center py-5">
+    <div class="container">
+        <h2 class="fw-bold">Start Building Exams Today</h2>
+        <p class="mb-4">Join hundreds of educators saving time with Exam Builder.</p>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-light btn-lg px-4">Create Free Account</a>
+    </div>
+</section>
+
+
+
+{% endblock %}

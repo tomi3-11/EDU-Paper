@@ -1,0 +1,15 @@
+# venv
+venv/
+my_env/
+env/
+
+# Cache
+__pycache__/
+
+# Environmental Variables
+.env
+
+# DB
+sqlite3
+migrations/
+instance/
