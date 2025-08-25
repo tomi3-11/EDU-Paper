@@ -54,3 +54,34 @@ def edit_exam(exam_id):
         return redirect(url_for('exams.list_exams'))
     
     return render_template('exams/edit.html', exam=exam)
+
+
+# Delete Exam
+@exams.route('/exams/<int:exam_id>/delete', methods=['POST'])
+@login_required
+def delete_exam(exam_id):
+    exam = Exam.query.get_or_404(exam_id)
+    
+    if exam.owner_id != current_user.id:
+        flash("Not Allowed", "danger")
+        return redirect(url_for('exams.list_exams'))
+    
+    db.session.delete(exam)
+    db.session.commit()
+    flash("Exam deleted", "info")
+    return redirect(url_for("exams.list_exams"))
+
+
+# View exam (with questions)
+@exams.route('/exams/<int:exam_id>')
+@login_required
+def view_exam(exam_id):
+    exam = Exam.query.get_or_404(exam_id)
+    
+    if exam.owner_is != current_user.id:
+        flash("Not Allowed", "danger")
+        return redirect(url_for("exams.list_exams"))
+    
+    questions = Question.query.filter_by(exam_id=exam.id).all()
+    return render_template("exams/view.html", exam=exam, questions=questions)
+
